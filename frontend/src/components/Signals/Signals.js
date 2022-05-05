@@ -10,8 +10,8 @@ function Signals() {
   const [signals, setSignals] = useState([])
 
   useEffect(() => {
-    refreshSignals()
-  }, [])
+    //refreshSignals()
+  })
 
   const refreshSignals = async () => {
     await axios.get('/api/signals/')

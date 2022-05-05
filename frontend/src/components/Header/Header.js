@@ -5,7 +5,7 @@ import {BiMenu} from 'react-icons/bi'
 function Header() {
   return (
     <header className='header'>
-        <h1>Signalzzz</h1>
+        <h1>SGL</h1>
         <BiMenu className='menu-icon'/>
     </header>
   )

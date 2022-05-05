@@ -1,0 +1,37 @@
+.landing-section {
+    position: relative;
+    top: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.chart-img {
+    width: 100%;
+
+}
+
+.intro {
+    margin: 50px 0;
+    font-size: 1.4em;
+}
+
+.buy-section, .trade-section {
+    position: relative;
+    top: 100px;
+    padding: 10px;
+}
+
+.btn {
+    border-radius: 16px;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+}
+
+.trade-section {
+    margin: 50px 0;
+}
