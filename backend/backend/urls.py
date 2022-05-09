@@ -23,5 +23,6 @@ router.register(r'signals', SignalView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('auth/', include('accounts.urls'))
 ]
