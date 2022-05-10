@@ -35,3 +35,8 @@
 .trade-section {
     margin: 50px 0;
 }
+
+.link {
+    text-decoration: none;
+    color: white;
+}
