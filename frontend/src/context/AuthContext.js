@@ -31,7 +31,7 @@ export const AuthProvider = ({children}) => {
             username,
             password
         })
-        console.log('Auth data: ', auth_data)
+        
         const response = await axios.post('/auth/token/', auth_data, {
             headers: {
                 'Content-Type': 'application/json'
@@ -58,6 +58,7 @@ export const AuthProvider = ({children}) => {
         first_name, 
         last_name
         ) => {
+            console.log('register user called')
             const reg_data = JSON.stringify({
                 username, 
                 password, 
@@ -66,7 +67,11 @@ export const AuthProvider = ({children}) => {
                 first_name, 
                 last_name
             })
-            const response = await axios.post('/auth/register/', reg_data)
+            const response = await axios.post('/auth/register/', reg_data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
 
             if (response.status === 201) {
                 navigate('/login')

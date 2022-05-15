@@ -1,49 +1,63 @@
 import './register.css'
-import React, {useContext} from 'react'
-import axios from 'axios'
+import React, {useContext, useState} from 'react'
 import AuthContext from '../../context/AuthContext'
 
 function Register() {
 
-     
+     const [errors, setErrors] = useState({})
+     const [password, setPassword] = useState()
+     const [password2, setPassword2] = useState()
+     const [email, setEmail] = useState()
+     const [username, setUsername] = useState()
+     const [first_name, setFirst_name] = useState()
+     const [last_name, setLast_name] = useState()
+
     const {registerUser} = useContext(AuthContext)
+    
 
     const handleRegistration = (e) => {
         e.preventDefault()
-        const username = e.target.username.value
-    
+        console.log('Handle register called')
+        registerUser(
+            username,
+            password,
+            password2,
+            email,
+            first_name,
+            last_name
+        )
     }
 
   return (
     <div className='register'>
         <h3>Create Account</h3>
-        <form className='register-form' onSubmit={() => handleRegistration()}>
+        <form className='register-form' onSubmit={handleRegistration} method='POST'>
         <div className='input-field'>
                 <label for='first_name'>First Name</label>
-                <input  name='first_name' id='first_name' className='form-control w-75' type='text' required /> 
+                <input onChange={(e) => setFirst_name(e.target.value)} name='first_name' id='first_name' className='form-control w-75' type='text' required /> 
             </div>
             <div className='input-field'>
                 <label for='last_name'>Last Name</label>
-                <input  name='last_name' id='last_name' className='form-control w-75' type='text' required /> 
+                <input onChange={(e) => setLast_name(e.target.value)} name='last_name' id='last_name' className='form-control w-75' type='text' required /> 
             </div>
             <div className='input-field'>
                 <label for='username'>Username</label>
-                <input  name='username' id='username' className='form-control w-75' type='text' required /> 
+                <input onChange={(e) => setUsername(e.target.value)} name='username' id='username' className='form-control w-75' type='text' required /> 
             </div>
 
             <div className='input-field'>
                 <label for='password'>Password</label>
-                <input  name='password' id='password' className='form-control w-75' type='password' required /> 
+                <input onChange={(e) => setPassword(e.target.value)} name='password' id='password' className='form-control w-75' type='password' required /> 
             </div>
 
             <div className='input-field'>
                 <label for='password2'>Confirm Password</label>
-                <input  name='password2' id='password2' className='form-control w-75' type='password' required /> 
+                <input onChange={(e) => setPassword2(e.target.value)} name='password2' id='password2' className='form-control w-75' type='password' required /> 
             </div>
 
             <div className='input-field'>
                 <label for='email'>Email</label>
-                <input  name='email' id='email' className='form-control w-75' type='email' required /> 
+                <input onChange={(e) => setEmail(e.target.value)} name='email' id='email' className='form-control w-75' type='email' required /> 
             </div>
             <div className='input-field mt-4'>
                 <input  className='btn btn-primary' type='submit' /> 
