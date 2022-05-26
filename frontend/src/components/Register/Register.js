@@ -5,23 +5,26 @@ import {useLocation, useNavigate} from 'react-router-dom'
 
 function Register(props) {
 
-     const [errors, setErrors] = useState({})
-     const [password, setPassword] = useState()
-     const [password2, setPassword2] = useState()
-     const [email, setEmail] = useState()
-     const [username, setUsername] = useState()
-     const [first_name, setFirst_name] = useState()
-     const [last_name, setLast_name] = useState()
+    const [errors, setErrors] = useState({})
+    const [password, setPassword] = useState()
+    const [password2, setPassword2] = useState()
+    const [email, setEmail] = useState()
+    const [username, setUsername] = useState()
+    const [first_name, setFirst_name] = useState()
+    const [last_name, setLast_name] = useState()
+    const [userType, setUserType] = useState('')
 
-        const {registerUser} = useContext(AuthContext)
+    const {registerUser} = useContext(AuthContext)
     
     const location = useLocation()
     const {next} = location.state
     console.log('next:', next)
 
+
     const handleRegistration = (e) => {
-        e.preventDefault()
-        console.log('Handle register called')
+        e.preventDefault()   
+        console.log('User Type', userType)
+
         registerUser(
             username,
             password,
@@ -29,6 +32,7 @@ function Register(props) {
             email,
             first_name,
             last_name,
+            userType,
             setErrors,
             next
         )
@@ -37,7 +41,7 @@ function Register(props) {
 
   return (
     <div className='register'>
-        <h3>Create Account</h3>
+        <h3>Create Pegasus Account</h3>
         <form className='register-form' onSubmit={handleRegistration} method='POST'>
             <div className='input-field'>
                {errors && <span className='text-danger text-sm mb-4'>{errors.message}</span>}
@@ -68,6 +72,17 @@ function Register(props) {
             <div className='input-field'>
                 <label for='email'>Email</label>
                 <input onChange={(e) => setEmail(e.target.value)} name='email' id='email' className='form-control w-75' type='email' required /> 
+            </div>
+            <div className='input-field'>
+                <label for='email'>How would you like to use Pegasus</label>
+                <div>
+                    <input onClick={(e) => setUserType(e.target.value)} type='radio' name='userType' value='merchant' id='merchant' required/>
+                    <label>I want to sell signals</label>
+                </div>
+                <div>
+                    <input onClick={(e) => setUserType(e.target.value)} type='radio' name='userType' value='buyer' id='buyer' />
+                    <label>I want to buy signals</label>
+                </div>
             </div>
             <div className='input-field mt-4'>
                 <input  className='btn btn-primary' type='submit' /> 

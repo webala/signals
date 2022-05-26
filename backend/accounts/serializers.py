@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import SignalSeller
+from .models import SignalSeller, SignalBuyer
 
 
 #Used to access and refresh tokens
@@ -29,11 +29,12 @@ class NewUserSerializer(serializers.ModelSerializer):
     
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
+    user_type = serializers.CharField(write_only=True, required=True)
     
 
     class Meta:
         model = User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name')
+        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'user_type')
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True}
@@ -56,6 +57,12 @@ class NewUserSerializer(serializers.ModelSerializer):
         print('User created')
         user.set_password(validated_data['password'])
         user.save()
+
+        user_type = validated_data['user_type']
+        if user_type == 'merchant':
+            SignalSeller.objects.create(user=user)
+        elif user_type == 'buyer':
+            SignalBuyer.objects.create(user=user)
 
         return user
 

@@ -10,7 +10,7 @@ function Header() {
   console.log('User: ', user)
   return (
     <header className='header'>
-        <h1>SGL</h1>
+        <h1>Pegasus</h1>
         {user?.username? (
           <p>Hello {user.username}</p>
         )

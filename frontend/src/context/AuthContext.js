@@ -65,6 +65,7 @@ export const AuthProvider = ({children}) => {
         email, 
         first_name, 
         last_name,
+        user_type,
         setErrors,
         next
         ) => {
@@ -75,7 +76,8 @@ export const AuthProvider = ({children}) => {
                 password2, 
                 email, 
                 first_name, 
-                last_name
+                last_name,
+                user_type
             })
 
             if (password !== password2) {

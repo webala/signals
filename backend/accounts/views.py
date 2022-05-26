@@ -21,5 +21,5 @@ class MyTokenObtainView(TokenObtainPairView):
 
 
 @api_view(['POST'])
-def create_signal_seller(request):
+def add_mpesa_number(request):
     serializer_class = SignalSellerSerializer(data=request.data)
