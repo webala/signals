@@ -1,8 +1,9 @@
 import './register.css'
 import React, {useContext, useState} from 'react'
 import AuthContext from '../../context/AuthContext'
+import {useLocation, useNavigate} from 'react-router-dom'
 
-function Register() {
+function Register(props) {
 
      const [errors, setErrors] = useState({})
      const [password, setPassword] = useState()
@@ -13,26 +14,41 @@ function Register() {
      const [last_name, setLast_name] = useState()
 
     const {registerUser} = useContext(AuthContext)
+    const navigate = useNavigate()
     
+    const location = useLocation()
+    const {next} = location.state
+    console.log('next:', next)
 
     const handleRegistration = (e) => {
         e.preventDefault()
         console.log('Handle register called')
-        registerUser(
-            username,
-            password,
-            password2,
-            email,
-            first_name,
-            last_name
-        )
+        const response = registerUser(
+                    username,
+                    password,
+                    password2,
+                    email,
+                    first_name,
+                    last_name,
+                    setErrors
+                )
+        console.log(response)
+        if (response.message === 'Success') {
+            navigate(`/${next}`)
+        } else {
+            console.log(response.message)
+            setErrors(response.message)
+        }
     }
 
   return (
     <div className='register'>
         <h3>Create Account</h3>
         <form className='register-form' onSubmit={handleRegistration} method='POST'>
-        <div className='input-field'>
+            <div className='input-field'>
+               {errors && <span className='text-danger text-sm mb-4'>{errors.message}</span>}
+            </div>
+            <div className='input-field'>
                 <label for='first_name'>First Name</label>
                 <input onChange={(e) => setFirst_name(e.target.value)} name='first_name' id='first_name' className='form-control w-75' type='text' required /> 
             </div>

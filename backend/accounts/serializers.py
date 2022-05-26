@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .models import SignalSeller
 
 
 #Used to access and refresh tokens
@@ -57,3 +58,7 @@ class NewUserSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class SignalSellerSerializer(serializers.ModelSerializer):
+    m_pesa_phone_number = serializers.CharField()

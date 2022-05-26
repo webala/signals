@@ -26,28 +26,36 @@ export const AuthProvider = ({children}) => {
 
     const navigate = useNavigate()
 
-    const loginUser = async (username, password) => {
+    const loginUser = async (username, password, setError) => {
         const auth_data = JSON.stringify({
             username,
             password
         })
-        
-        const response = await axios.post('/auth/token/', auth_data, {
+        let res
+        await axios.post('/auth/token/', auth_data, {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-
-        const res_data = await response.data
-
-        if (response.status === 200) {
-            setAuthTokens(res_data)
-            setUser(jwt_decode(res_data.access))
-            localStorage.setItem('authTokens', JSON.stringify(res_data))
-            navigate('/')
-        } else {
-            alert('Something went wrong')
-        }
+        }).then((response) => {
+            if (response.status === 200) {
+                setAuthTokens(response.data)
+                setUser(jwt_decode(response.data.access))
+                localStorage.setItem('authTokens', JSON.stringify(response.data))
+                navigate('/')
+            }  
+        }).catch(error => {
+            if (error.response.status === 500) {
+                res = {'message': 'Server error. Please try again later'}
+                setError(res)
+            } else if (error.response.status === 401) {
+                res = {'message': 'Incorrect username or password'}
+                setError(res)
+            } else if (error.response.status >= 400 && error.response.status < 500){
+                res = {'message': 'Error. Please check input fields and try again'}
+                setError(res)
+            }
+        })        
+        
     }
 
     const registerUser = async (
@@ -56,7 +64,7 @@ export const AuthProvider = ({children}) => {
         password2, 
         email, 
         first_name, 
-        last_name
+        last_name,setErrors
         ) => {
             console.log('register user called')
             const reg_data = JSON.stringify({
@@ -67,17 +75,37 @@ export const AuthProvider = ({children}) => {
                 first_name, 
                 last_name
             })
-            const response = await axios.post('/auth/register/', reg_data, {
+
+            if (password !== password2) {
+                alert('The two password fields must match')
+                return
+            }
+
+            let res
+            await axios.post('/auth/register/', reg_data, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
+            }).then((response) =>{
+                if (response.status >= 200 && response.status < 300) {
+                    res = {'message': 'Success'}
+                    navigate('/')
+                } 
+            }).catch(error => {
+                if (error.response.status === 500) {
+                    res = {'message': 'Server error. Please try again later'}
+                    setErrors(res)
+                }else if (error.response.status === 400){
+                    res = {'message': 'Username or email already in use.'}
+                    setErrors(res)
+                }
+                else if (error.response.status >= 400 && error.response.status < 500){
+                    res = {'message': 'Error. Please check input fields and try again'}
+                    setErrors(res)
+                }
             })
 
-            if (response.status === 201) {
-                navigate('/login')
-            } else {
-                alert('Something went wrong')
-            }
+            return res
     }
 
     const logoutUser = () => {

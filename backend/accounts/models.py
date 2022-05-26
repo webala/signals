@@ -8,7 +8,7 @@ class SignalBuyer(models.Model):
 
 class SignalSeller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    m_pesa_phone_number = models.IntegerField()
+    m_pesa_phone_number = models.CharField(max_length=15)
     buyers = models.ManyToManyField(SignalBuyer, blank=True)
 
 

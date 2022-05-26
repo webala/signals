@@ -6,6 +6,7 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.models import User
+from .serializers import SignalSellerSerializer
 
 
 # Create your views here.
@@ -17,3 +18,8 @@ class RegisterView(generics.CreateAPIView):
 
 class MyTokenObtainView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+@api_view(['POST'])
+def create_signal_seller(request):
+    serializer_class = SignalSellerSerializer(data=request.data)

@@ -1,9 +1,10 @@
 import './login.css'
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import AuthContext from '../../context/AuthContext'
 
 function Login() {
 
+    const [error, setError] = useState({})
     const {loginUser} = useContext(AuthContext)
 
     const handleLogin = (e) => {
@@ -11,13 +12,16 @@ function Login() {
         const username = e.target.username.value
         const password = e.target.password.value
 
-        username.length > 0 && loginUser(username, password)
+        username.length > 0 && loginUser(username, password, setError)
     }
     
   return (
     <div className='login' onSubmit={() => handleLogin()}>
         <h3>Login</h3>
         <form className='login-form' onSubmit={handleLogin}>
+            <div className='input-field'>
+                {error && <span className='text-danger text-sm mb-4'>{error.message}</span>}
+            </div>
             <div className='input-field'>
                 <label for='username'>Username</label>
                 <input name='username' id='username' className='form-control w-75' type='text' required /> 
