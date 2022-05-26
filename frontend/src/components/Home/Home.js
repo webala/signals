@@ -16,13 +16,13 @@ function Home() {
         <section className='buy-section'>
             <h2>Buy signals</h2>
             <p>Subscribe to top forex traders to get signals in real time.</p>
-            <button class='btn btn-primary btn-sm'><Link className='link' to={{pathname: '/register'}} state={{next: 'create_seller'}}>Get started</Link></button>
+            <button class='btn btn-primary btn-sm'><Link className='link' to={{pathname: '/register'}} state={{next: 'buyer'}}>Get started</Link></button>
         </section>
 
         <section className='trade-section'>
             <h2>Sell signals</h2>
             <p>Share real time forex signals to clients on a subscription basis.</p>
-            <button class='btn btn-primary btn-sm'><Link className='link' to={{pathname: '/register'}} state={{next: 'merchant/create'}}>Get started</Link></button>
+            <button class='btn btn-primary btn-sm'><Link className='link' to={{pathname: '/register'}} state={{next: 'merchant'}}>Get started</Link></button>
         </section>
     </div>
   )

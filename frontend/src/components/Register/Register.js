@@ -13,8 +13,7 @@ function Register(props) {
      const [first_name, setFirst_name] = useState()
      const [last_name, setLast_name] = useState()
 
-    const {registerUser} = useContext(AuthContext)
-    const navigate = useNavigate()
+        const {registerUser} = useContext(AuthContext)
     
     const location = useLocation()
     const {next} = location.state
@@ -23,22 +22,17 @@ function Register(props) {
     const handleRegistration = (e) => {
         e.preventDefault()
         console.log('Handle register called')
-        const response = registerUser(
-                    username,
-                    password,
-                    password2,
-                    email,
-                    first_name,
-                    last_name,
-                    setErrors
-                )
-        console.log(response)
-        if (response.message === 'Success') {
-            navigate(`/${next}`)
-        } else {
-            console.log(response.message)
-            setErrors(response.message)
-        }
+        registerUser(
+            username,
+            password,
+            password2,
+            email,
+            first_name,
+            last_name,
+            setErrors,
+            next
+        )
+        
     }
 
   return (

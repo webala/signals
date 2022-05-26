@@ -64,7 +64,9 @@ export const AuthProvider = ({children}) => {
         password2, 
         email, 
         first_name, 
-        last_name,setErrors
+        last_name,
+        setErrors,
+        next
         ) => {
             console.log('register user called')
             const reg_data = JSON.stringify({
@@ -89,7 +91,12 @@ export const AuthProvider = ({children}) => {
             }).then((response) =>{
                 if (response.status >= 200 && response.status < 300) {
                     res = {'message': 'Success'}
-                    navigate('/')
+                    if (next === 'merchant') {
+                        navigate('/merchant/create')
+                    }
+                    else {
+                        navigate('/')
+                    }
                 } 
             }).catch(error => {
                 if (error.response.status === 500) {
