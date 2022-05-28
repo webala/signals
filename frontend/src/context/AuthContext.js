@@ -94,10 +94,10 @@ export const AuthProvider = ({children}) => {
                 if (response.status >= 200 && response.status < 300) {
                     res = {'message': 'Success'}
                     if (next === 'merchant') {
-                        navigate('/merchant/create')
+                        navigate('/login')
                     }
                     else {
-                        navigate('/')
+                        navigate('/login')
                     }
                 } 
             }).catch(error => {

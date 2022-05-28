@@ -20,6 +20,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username',)
 #Register user form
 class NewUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -68,4 +72,8 @@ class NewUserSerializer(serializers.ModelSerializer):
 
 
 class SignalSellerSerializer(serializers.ModelSerializer):
-    m_pesa_phone_number = serializers.CharField()
+    user = UserSerializer(required=False)
+    class Meta:
+        model = SignalSeller
+        fields = ('m_pesa_phone_number', 'user', 'buyers')
+    
