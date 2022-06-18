@@ -16,9 +16,9 @@ function Register(props) {
 
     const {registerUser} = useContext(AuthContext)
     
-    const location = useLocation()
-    const {next} = location.state
-    console.log('next:', next)
+    // const location = useLocation()
+    // const {next} = location.state
+    // console.log('next:', next)
 
 
     const handleRegistration = (e) => {
@@ -34,7 +34,7 @@ function Register(props) {
             last_name,
             userType,
             setErrors,
-            next
+           // next
         )
         
     }

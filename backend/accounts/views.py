@@ -49,3 +49,15 @@ def testEndPoint(request):
         data = f'Congratulation your API just responded to POST request with text: {text}'
         return Response({'response': data}, status=status.HTTP_200_OK)
     return Response({}, status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_type_view(request):
+    user = request.user
+    query = SignalSeller.objects.filter(user=user).exists()
+    if query:
+        user_type = 'seller'
+    else:
+        user_type = 'buyer'
+    print(user_type)
+    return Response({'user_type': user_type})

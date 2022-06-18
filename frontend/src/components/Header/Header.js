@@ -6,17 +6,16 @@ import { Link } from 'react-router-dom'
 
 function Header() {
 
-  const {user, logoutUser} = useContext(AuthContext)
-  console.log('User: ', user)
+  
   return (
     <header className='header'>
-        <h1>Pegasus</h1>
-        {user?.username? (
-          <p>Hello {user.username}</p>
-        )
-      : <Link to='/login'>Login</Link>
-      } 
-        <BiMenu className='menu-icon'/>
+        <h1>4x Trader</h1>
+        <nav className='navigation'>
+          <ul>
+            <li><Link to="/login">Sign In </Link></li>
+            <li><Link to='/register'>Join 4x </Link></li>
+          </ul>
+        </nav>
     </header>
   )
 }

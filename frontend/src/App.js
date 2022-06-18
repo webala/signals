@@ -1,8 +1,9 @@
 import './App.css';
 import BuySignals from './components/BuySignals/BuySignals';
+import NewMember from './components/Home/NewMember';
 import Home from './components/Home/Home';
 import {Routes, Route} from 'react-router-dom'
-import Dashboard from './components/Dashboard/Dashboard';
+import SellerDash from './components/Dashboard/SellerDash';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import { AuthProvider } from './context/AuthContext';
@@ -14,9 +15,10 @@ function App() {
     <AuthProvider>
       <div className="App">
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<NewMember />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/signals' element={<BuySignals />} />
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/dashboard' element={<SellerDash />} /> 
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/merchant/create' element={<CreateSeller />} />

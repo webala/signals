@@ -5,5 +5,22 @@
     justify-content: space-between;
     align-items: center;
     margin: 10px 0 50px 0;
-    padding: 10px 10px;
+    padding: 10px 200px;
 }
+
+.header .navigation ul{
+    list-style: none;
+    display: flex;
+}
+
+.header .navigation ul li{
+   margin: 0 10px;
+   cursor: pointer;
+   color: blue;
+  transition: .3s ease;
+}
+
+.header .navigation ul li:hover{
+    color: black;
+    font-size: 1.1em;
+ }
