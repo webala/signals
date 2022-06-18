@@ -55,6 +55,7 @@ def testEndPoint(request):
 def user_type_view(request):
     user = request.user
     query = SignalSeller.objects.filter(user=user).exists()
+    user_type = None
     if query:
         user_type = 'seller'
     else:

@@ -29,25 +29,31 @@ function PostSignals() {
 
     
   return (
-    <div>
+    <div className='post-signals'>
         <form className='signals-form' onSubmit={handleSubmit}>
             <h2>Post Signal</h2>
             <div className='form-field'>
+                <label>Comodity</label>
                 <input onChange={e => setCommodity(e.target.value)} type='text' placeholder='Comodity' required/>
             </div>
             <div className='form-field'>
+                <label>Market Range</label>
                 <input onChange={e => setMktRange(e.target.value)} type='text' placeholder='Market Range' required/>
             </div>
             <div className='form-field'>
+            <label>Stop Loss</label>
                 <input onChange={e => setSl(e.target.value)} type='number' placeholder='Stop Loss' required/>
             </div>
             <div className='form-field'>
-                <input onChange={e => setTp1(e.target.value)} type='number' placeholder='Take Profit' required/>
+                <label>Take Profit 1</label>
+                <input onChange={e => setTp1(e.target.value)} type='number' placeholder='Take Profit 1' required/>
             </div>
             <div className='form-field'>
+                <label>Take Profit 2</label>
                 <input onChange={e => setTp2(e.target.value)} type='number' placeholder='Take Profit' required/>
             </div>
             <div className='form-field'>
+                <label>Take Profit 3</label>
                 <input onChange={e => setTp3(e.target.value)} type='number' placeholder='Take Profit' required/>
             </div>
             <div className='form-field'>
@@ -56,7 +62,7 @@ function PostSignals() {
             </div>
 
             <div className='form-field'>
-                <input type='submit' />
+                <button type='sumit' className='btn btn-primary'>Post Signal</button>
             </div>
         </form>
     </div>

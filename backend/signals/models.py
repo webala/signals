@@ -17,6 +17,7 @@ class Signal(models.Model):
     take_profit2 = models.IntegerField()
     take_profit3 = models.IntegerField()
     action = models.CharField(choices=action_choices, max_length=4)
+    
 
     def __str__(self):
         return self.comodity
