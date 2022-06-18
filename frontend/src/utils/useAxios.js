@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 
 
-const baseURL = '/auth'
+const baseURL = ''
 
 const useAxios = () => {
     const { authTokens, setUser, setAuthTokens } = useContext(AuthContext)
