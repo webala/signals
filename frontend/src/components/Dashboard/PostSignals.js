@@ -1,5 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import useAxios from '../../utils/useAxios'
+import Signals from '../Signals/Signals'
+import AuthContext from '../../context/AuthContext'
 
 function PostSignals() {
 
@@ -10,6 +12,10 @@ function PostSignals() {
     const [tp2, setTp2] = useState()
     const [tp3, setTp3] = useState()
     const [action, setAction] = useState()
+
+    const authContext = useContext(AuthContext)
+    const {user} = authContext
+    console.log("user: ", user.username)
 
 
     const api = useAxios()
@@ -30,6 +36,10 @@ function PostSignals() {
     
   return (
     <div className='post-signals'>
+        <div className='signals'>
+            <h1>Your Signals</h1>
+          <Signals username={user.username}/>
+        </div>
         <form className='signals-form' onSubmit={handleSubmit}>
             <h2>Post Signal</h2>
             <div className='form-field'>

@@ -1,8 +1,9 @@
 
-function Signal(signal) {
+function Signal({signal}) {
+  console.log(signal)
   return (
     <div className='signal'>
-        <h2 className='currency'>{signal.comodity}</h2>
+        <h2 className='currency'>{signal['comodity']}</h2>
         <p className='mkt-range'>RANGE: {signal.mkt_range}</p>
         <p className='sl'>SL: <span>{signal.stop_loss}</span></p>
         <p className='tp'>TP1: <span>{signal.take_profit1}</span></p>

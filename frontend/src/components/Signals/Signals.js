@@ -6,23 +6,29 @@ import Signal from './Signal'
 
 
 
-function Signals() {
+function Signals({username}) {
 
   const [signals, setSignals] = useState([])
 
-  useEffect(() => {
-    //refreshSignals()
-  })
-
   const refreshSignals = async () => {
-    await axios.get('/api/signals/')
-    .then((res) => setSignals(res.data))
+    await axios.get(`/api/signals/${username}`)
+    .then((res) => {
+      console.log(res.data)
+      setSignals(res.data)})
     .catch(error => alert(`error :${error}`))
   }
 
+  useEffect(() => {
+    refreshSignals()
+  }, [])
 
+  
   return (
-      <div> {signals.map((signal) => <Signal signal={signal} />)}</div>
+      <div> {signals.map((signal) => {
+        return (
+          <Signal key={signals.indexOf(signal)} signal={signal} />
+        )
+      })}</div>
       )
 }
 

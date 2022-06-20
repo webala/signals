@@ -8,6 +8,8 @@ import './dashboard.css'
 function SellerDash() {
   const [page, setPage] = useState('signals-form')
 
+
+
   return (      
     <div className='dashboard'>
         <Header/>
@@ -23,6 +25,7 @@ function SellerDash() {
           {page === 'signals-form' && <PostSignals />}
           {page === 'subscribers' && <Subscribers />}
         </div>
+       
     </div>
   )
 }
